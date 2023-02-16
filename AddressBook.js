@@ -344,9 +344,36 @@ let EditContacts = () =>
     catch(e)
     {
         console.error(e);
-    }
-    
+    }   
 }
+
+let deleteContacts = () =>
+{
+    try
+    {
+        if(addressBookPersonArr.length>0)
+        {
+            while(true)
+            {
+                var deletePersonName = getName('First name of person you want to Delete');
+                if(deletePersonName!=null)
+                    break;
+            }
+            //find index of person name
+            const index = addressBookPersonArr.indexOf(deletePersonName);
+            //using splice remove the element
+            addressBookPersonArr.splice(index,1);
+            console.log("***************Deleted******************");
+        }
+        else
+            throw "AddressBook Is empty";
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
+
 let AddressBookOperations = () =>
 {
     try
