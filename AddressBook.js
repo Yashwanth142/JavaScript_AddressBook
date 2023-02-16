@@ -83,7 +83,7 @@ let getZipCode = () =>
     }
     
 }
-//method to validate phone number
+//method to validate phone nu,mber
 let getPhoneNumber = () =>
 {
     try
@@ -105,7 +105,7 @@ let getEmail = () =>
 {
     try
     {
-        let emailPattern = new RegExp('^[A-za-z]+([+. \-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$');
+        let emailPattern = new RegExp('^[A-Za-z]+([+. \-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$');
         let emailId = prompt('Enter Email Id: ');
         if(!emailPattern.test(emailId))
             throw 'Error!! Email Id is not valid';
@@ -117,7 +117,6 @@ let getEmail = () =>
         console.error(e);
     }
 }
-
 //method to add details into object
 let ValidateAndAdd = () =>
 {
@@ -191,9 +190,9 @@ let ValidateAndAdd = () =>
     catch(e)
     {
         console.error(e);
-    }     
+    }
+       
 }
-
 //Function to add contacts into array
 let AddContacts = () =>
 {
@@ -210,22 +209,151 @@ let DisplayContacts = () =>
 {
     if(addressBookPersonArr.length>0)
     {
-        console.log("\n********************AddressBook*******************");
+        console.log("********************AddressBook*******************");
         addressBookPersonArr.forEach(x => console.log(x.toString())); 
     }
     else
     {
         console.log("No details present");
     }
+   
 }
+//function to edit contacts
+let EditContacts = () =>
+{
+    try
+    {
+        if(addressBookPersonArr.length>0)
+        {
+            while(true)
+            {
+                var editPersonName = getName('Enter first name of person you want to edit');
+                if(editPersonName!=null)
+                    break;
+            }
+            let personDetails = addressBookPersonArr.find(x => x.firstName == editPersonName);
+            if(personDetails==null)
+                throw `Error! This ${editPersonName} name is not present`;
+            while(true)
+            {
+                console.log("1.Edit Firstname\n2.Edit Lastname\n3.Edit Address\n4.Edit city\n5.Edit State\n6.Zipcode\n7.Phone number\n8.email id\n9.Exit");
+                switch(parseInt(prompt('Enter the choice? : ')))
+                {
+                    case 1:
+                        //FirstName
+                        while(true)
+                        {
+                            var fName =getName('FirstName');
+                            if(fName!=null)
+                                break;
+                        }
+                        personDetails.firstName = fname;
+                        console.log("Edited");
+                        break;
+                    case 2:
+                        //LastName
+                        while(true)
+                        {
+                            var lName = getName('LastName');
+                            if(lName!=null)
+                                break;
+                        }
+                        personDetails.lastName = lName;
+                        console.log("Edited");
+                        break;
+                    case 3:
+                        //Address
+                        while(true)
+                        {
+                            var addr = getAddressDetails('address');
+                            if(addr!=null)
+                                break;
+                        }
+                        personDetails.address = addr;
+                        console.log("Edited");
+                        break;
+                    case 4:
+                        //city
+                        while(true)
+                        {
+                            var c = getAddressDetails('city');
+                            if(c!=null)
+                                break;
+                        }
+                        personDetails.city = c;
+                        console.log("Edited");
+                        break;
+                    case 5:
+                        //state
+                        while(true)
+                        {
+                            var s = getAddressDetails('state');
+                            if(s!=null)
+                                break;
+                        }
+                        personDetails.state = s;
+                        console.log("Edited");
+                        break;
+                    case 6:
+                        //zipCode
+                        while(true)
+                        {
+                            var ZC = getZipCode();
+                            if(ZC!=null)
+                                break;
+                        }
+                        personDetails.zipCode = ZC;
+                        console.log("Edited");
+                        break;
+                    case 7:
+                        //phone number
+                        while(true)
+                        {
+                            var pN = getPhoneNumber();
+                            if(pN!=null)
+                                break;
+                        }
+                        personDetails.phoneNumber = pN;
+                        console.log("Edited");
+                        break;
+                    case 8:
+                        //email id
+                        while(true)
+                        {
+                            var mailId = getEmail();
+                            if(mailId!=null)
+                                break;
+                        }
+                        personDetails.emailId = mailId;
+                        console.log("Edited");
+                        break;
+                    case 9:
+                        console.log("Exited");
+                        return;
+                    default:
+                        console.log("Enter correct value");
+                        break;
 
+                }
+            }
+        }
+        else
+            throw 'Address book is empty'
+        
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+    
+}
 let AddressBookOperations = () =>
 {
     try
     {
         while(true)
         {
-            console.log("\n1.Add new contacts to addressbook\n2.Display\n3.exit");
+            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -235,6 +363,9 @@ let AddressBookOperations = () =>
                     DisplayContacts();
                     break;
                 case 3:
+                    EditContacts();
+                    break;
+                case 4:
                     console.log("Exited");
                     return;
                 default:
