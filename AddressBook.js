@@ -567,16 +567,29 @@ let CountByCityOrState = () =>
         console.error(e);
     }
 }
+
 let SortContacts = () =>
 {
     if(addressBookPersonArr.length>0)
     {
-        console.log("\nSORT By\n1.Name");
+        console.log("\nSORT By\n1.Name\n2.City\n3.State\n4.Zip");
         switch(parseInt(prompt('Enter the choice? : ')))
         {
             case 1:
                 addressBookPersonArr.sort((a,b) => a.firstName>b.firstName? 1:-1);
-                console.log("***********SORTED************");
+                console.log("SORTED");
+                break;
+            case 2:
+                addressBookPersonArr.sort((a,b) => a.city>b.city? 1:-1);
+                console.log("SORTED");
+                break;
+            case 3:
+                addressBookPersonArr.sort((a,b) => a.state>b.state? 1:-1);
+                console.log("SORTED");
+                break;
+            case 4:
+                addressBookPersonArr.sort((a,b) => a.zipCode>b.zipCode? 1:-1);
+                console.log("SORTED");
                 break;
         }
     
@@ -584,7 +597,7 @@ let SortContacts = () =>
     else
     {
         console.log("Address Book is empty");
-    }    
+    }        
 }
 
 let AddressBookOperations = () =>
