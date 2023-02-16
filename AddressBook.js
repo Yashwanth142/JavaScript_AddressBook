@@ -567,6 +567,26 @@ let CountByCityOrState = () =>
         console.error(e);
     }
 }
+let SortContacts = () =>
+{
+    if(addressBookPersonArr.length>0)
+    {
+        console.log("\nSORT By\n1.Name");
+        switch(parseInt(prompt('Enter the choice? : ')))
+        {
+            case 1:
+                addressBookPersonArr.sort((a,b) => a.firstName>b.firstName? 1:-1);
+                console.log("***********SORTED************");
+                break;
+        }
+    
+    }
+    else
+    {
+        console.log("Address Book is empty");
+    }    
+}
+
 let AddressBookOperations = () =>
 {
     try
@@ -600,7 +620,10 @@ let AddressBookOperations = () =>
                 case 8:
                     CountByCityOrState();
                     break;
-                case 9:
+                 case 9:
+                    SortContacts();
+                    break;
+                case 10:
                     console.log("Exited");
                     return;
                 default:
