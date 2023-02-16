@@ -512,6 +512,61 @@ let ViewByCityOrState = () =>
         console.error(e);
     }
 }
+let CountByCityOrState = () =>
+{
+    try
+    {
+        while(true)
+        {
+            console.log("\n1.CountByCity\n2.CountByState\n3.Exit");
+            switch(parseInt(prompt('Enter the choice? : ')))
+            {
+                case 1:
+                    //city
+                    while(true)
+                    {
+                        var cityName = getAddressDetails('city Name');
+                        if(cityName!=null)
+                            break;
+                    }
+                   
+                    //using filter and reduce view details by city name
+                    let cityCount = addressBookPersonArr.filter(
+                        (x)=>x.city ==cityName
+                    ).reduce(
+                        (i) => i+1,0 
+                    );
+                    console.log(`\nThere are ${cityCount} person in ${cityName}`); 
+                    break;                               
+                case 2:
+                    //state
+                    while(true)
+                    {
+                        var stateName = getAddressDetails('state');
+                        if(stateName!=null)
+                            break;
+                    }
+                    
+                    //using filter and map reduce details by state name
+                    let stateCount = addressBookPersonArr.filter(
+                        (x)=>x.state ==stateName
+                    ).reduce(
+                        (i) => i+1,0 
+                    );
+                    console.log(`\nThere are ${stateCount} person in ${stateName}`);
+                    break;
+                case 3:
+                    console.log("Exit from search");
+                    return;
+
+            }
+        }
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
 let AddressBookOperations = () =>
 {
     try
@@ -543,6 +598,9 @@ let AddressBookOperations = () =>
                     ViewByCityOrState();
                     break;
                 case 8:
+                    CountByCityOrState();
+                    break;
+                case 9:
                     console.log("Exited");
                     return;
                 default:
